@@ -1,6 +1,5 @@
 from django.shortcuts import render
-
-# Create your views here.
+from .models import *
 
 
 def index(request):
@@ -20,14 +19,21 @@ def Contact(request):
     context = {'pageinfo': 'Contact'}
     return render(request,'contact.html', context)
 
-def Detail(request):
+def Detail(request,id):
     context = {'pageinfo': 'Detail'}
+    post = Post.objects.get(id=id)
+    
+    context.update({'post':post})
     return render(request,'detail.html', context)
 
 # PAGES
 def Blog(request):
     context = {'pageinfo': 'Blog'}
-    return render(request,'pages/blog.html', context)
+
+    posts = Post.objects.all().order_by('-id')
+    
+    context.update({"posts": posts})
+    return render(request, 'pages/blog.html', context)
 
 def Feature(request):
     context = {'pageinfo': 'Feature'}
