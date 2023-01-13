@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, HttpResponseRedirect
 from .models import *
 
 
@@ -22,8 +22,22 @@ def Contact(request):
 def Detail(request,id):
     context = {'pageinfo': 'Detail'}
     post = Post.objects.get(id=id)
+    categorys = Category.objects.all()
+    tagname = Tagname.objects.all()
+    posts_random = Post.objects.all().order_by('?')[:3]
     
-    context.update({'post':post})
+    if request.method == "POST":
+        user = request.POST["user"]
+        email = request.POST["email"]
+        title = request.POST["title"]
+        comment = request.POST["comment"]
+        
+        comm = Comment(user=user, email=email, title= title, text=comment, post=post)
+        comm.save()
+        return HttpResponseRedirect('/Detail/'+id+'/')
+    
+    context.update({'post': post, "categorys": categorys,
+                   "tagname": tagname, "posts_random": posts_random})
     return render(request,'detail.html', context)
 
 # PAGES
@@ -31,8 +45,12 @@ def Blog(request):
     context = {'pageinfo': 'Blog'}
 
     posts = Post.objects.all().order_by('-id')
+    categorys = Category.objects.all()
+    tagname = Tagname.objects.all()
+    posts_random = Post.objects.all().order_by('?')[:3]
     
-    context.update({"posts": posts})
+    context.update(
+        {"posts": posts, "categorys": categorys, "tagname": tagname, "posts_random": posts_random})
     return render(request, 'pages/blog.html', context)
 
 def Feature(request):

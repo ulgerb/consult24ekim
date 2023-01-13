@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 
 class Category(models.Model):
     category = models.CharField(("Kategori"), max_length=50)
-    
+
     
     def __str__(self):
         return self.category
@@ -27,3 +27,15 @@ class Post(models.Model):
 
     def __str__(self):
         return self.title
+    
+class Comment(models.Model):
+    post = models.ForeignKey(Post, verbose_name=("Yorum Yapılan Post"), on_delete=models.CASCADE)
+    user = models.CharField(("Yorum Yapan"), max_length=50)
+    email = models.EmailField(("Email"), max_length=254, null=True)
+    title = models.CharField(("Yorum Başlığı"), max_length=50)
+    text = models.TextField(("Yorum"), max_length=200)
+    date_now = models.DateTimeField(("Yorum Zamanı"), auto_now_add=True)
+
+    def __str__(self):
+        return self.title
+    

@@ -72,11 +72,11 @@
                 <div class="mb-5">
                     <h2 class="mb-4">Categories</h2>
                     <div class="d-flex flex-column justify-content-start bg-secondary p-4">
-                        <a class="h5 mb-3" href="#"><i class="bi bi-arrow-right text-primary me-2"></i>Web Design</a>
-                        <a class="h5 mb-3" href="#"><i class="bi bi-arrow-right text-primary me-2"></i>Web Development</a>
-                        <a class="h5 mb-3" href="#"><i class="bi bi-arrow-right text-primary me-2"></i>Web Development</a>
-                        <a class="h5 mb-3" href="#"><i class="bi bi-arrow-right text-primary me-2"></i>Keyword Research</a>
-                        <a class="h5" href="#"><i class="bi bi-arrow-right text-primary me-2"></i>Email Marketing</a>
+                        
+                        {% for category in categorys %}
+                        <a class="h5 mb-3" href="#"><i class="bi bi-arrow-right text-primary me-2"></i>{{ category.category }}</a>
+                        {% endfor %}
+                            
                     </div>
                 </div>
                 <!-- Category End -->
@@ -84,31 +84,16 @@
                 <!-- Recent Post Start -->
                 <div class="mb-5">
                     <h2 class="mb-4">Recent Post</h2>
+                    
+                    {% for random in posts_random %}
                     <div class="d-flex mb-3">
-                        <img class="img-fluid" src="img/blog-1.jpg" style="width: 100px; height: 100px; object-fit: cover;" alt="">
-                        <a href="" class="h5 d-flex align-items-center bg-secondary px-3 mb-0">Lorem ipsum dolor sit amet adipis elit
+                        <img class="img-fluid" src="{{ random.image.url }}" style="width: 100px; height: 100px; object-fit: cover;" alt="">
+                        <a href="{% url 'Detail' random.id %}" class="h5 d-flex align-items-center bg-secondary px-3 mb-0">{{ random.title }}
                         </a>
                     </div>
-                    <div class="d-flex mb-3">
-                        <img class="img-fluid" src="img/blog-1.jpg" style="width: 100px; height: 100px; object-fit: cover;" alt="">
-                        <a href="" class="h5 d-flex align-items-center bg-secondary px-3 mb-0">Lorem ipsum dolor sit amet adipis elit
-                        </a>
-                    </div>
-                    <div class="d-flex mb-3">
-                        <img class="img-fluid" src="img/blog-1.jpg" style="width: 100px; height: 100px; object-fit: cover;" alt="">
-                        <a href="" class="h5 d-flex align-items-center bg-secondary px-3 mb-0">Lorem ipsum dolor sit amet adipis elit
-                        </a>
-                    </div>
-                    <div class="d-flex mb-3">
-                        <img class="img-fluid" src="img/blog-1.jpg" style="width: 100px; height: 100px; object-fit: cover;" alt="">
-                        <a href="" class="h5 d-flex align-items-center bg-secondary px-3 mb-0">Lorem ipsum dolor sit amet adipis elit
-                        </a>
-                    </div>
-                    <div class="d-flex">
-                        <img class="img-fluid" src="img/blog-1.jpg" style="width: 100px; height: 100px; object-fit: cover;" alt="">
-                        <a href="" class="h5 d-flex align-items-center bg-secondary px-3 mb-0">Lorem ipsum dolor sit amet adipis elit
-                        </a>
-                    </div>
+                    {% endfor %}
+                        
+                    
                 </div>
                 <!-- Recent Post End -->
 
@@ -122,18 +107,11 @@
                 <div class="mb-5">
                     <h2 class="mb-4">Tag Cloud</h2>
                     <div class="d-flex flex-wrap m-n1">
-                        <a href="" class="btn btn-secondary m-1">Design</a>
-                        <a href="" class="btn btn-secondary m-1">Development</a>
-                        <a href="" class="btn btn-secondary m-1">Marketing</a>
-                        <a href="" class="btn btn-secondary m-1">SEO</a>
-                        <a href="" class="btn btn-secondary m-1">Writing</a>
-                        <a href="" class="btn btn-secondary m-1">Consulting</a>
-                        <a href="" class="btn btn-secondary m-1">Design</a>
-                        <a href="" class="btn btn-secondary m-1">Development</a>
-                        <a href="" class="btn btn-secondary m-1">Marketing</a>
-                        <a href="" class="btn btn-secondary m-1">SEO</a>
-                        <a href="" class="btn btn-secondary m-1">Writing</a>
-                        <a href="" class="btn btn-secondary m-1">Consulting</a>
+                         
+                        {% for tag in tagname %}
+                        <a href="" class="btn btn-secondary m-1">{{ tag.tagname }}</a>
+                        {% endfor %}
+                            
                     </div>
                 </div>
                 <!-- Tags End -->
