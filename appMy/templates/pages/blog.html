@@ -74,7 +74,7 @@
                     <div class="d-flex flex-column justify-content-start bg-secondary p-4">
                         
                         {% for category in categorys %}
-                        <a class="h5 mb-3" href="#"><i class="bi bi-arrow-right text-primary me-2"></i>{{ category.category }}</a>
+                        <a class="h5 mb-3" href="{% url 'Blog' category.category %}"><i class="bi bi-arrow-right text-primary me-2"></i>{{ category.category }}</a>
                         {% endfor %}
                             
                     </div>

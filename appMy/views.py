@@ -1,4 +1,4 @@
-from django.shortcuts import render, HttpResponseRedirect
+from django.shortcuts import render, HttpResponseRedirect, redirect
 from .models import *
 
 
@@ -16,6 +16,17 @@ def Services(request):
     return render(request,'service.html', context)
 
 def Contact(request):
+
+    if request.method == "POST":
+        user = request.POST["user"]
+        email = request.POST["email"]
+        title = request.POST["title"]
+        text = request.POST["text"]
+
+        contact = Contacts(user=user,email=email,title=title,text=text)
+        contact.save()
+        return redirect('index')
+    
     context = {'pageinfo': 'Contact'}
     return render(request,'contact.html', context)
 
@@ -25,6 +36,8 @@ def Detail(request,id):
     categorys = Category.objects.all()
     tagname = Tagname.objects.all()
     posts_random = Post.objects.all().order_by('?')[:3]
+    comments = Comment.objects.filter(post=post)
+    
     
     if request.method == "POST":
         user = request.POST["user"]
@@ -37,14 +50,22 @@ def Detail(request,id):
         return HttpResponseRedirect('/Detail/'+id+'/')
     
     context.update({'post': post, "categorys": categorys,
-                   "tagname": tagname, "posts_random": posts_random})
+                   "tagname": tagname, "posts_random": posts_random,
+                    "comments": comments})
     return render(request,'detail.html', context)
 
-# PAGES
-def Blog(request):
-    context = {'pageinfo': 'Blog'}
 
-    posts = Post.objects.all().order_by('-id')
+# PAGES
+def Blog(request,category="all"):
+    context = {'pageinfo': 'Blog'}
+    
+    if category == "all":
+        posts = Post.objects.all().order_by('-id')
+    else:
+        filt = Category.objects.get(category=category)
+        posts = Post.objects.filter(category=filt.id).order_by('-id')
+        
+        
     categorys = Category.objects.all()
     tagname = Tagname.objects.all()
     posts_random = Post.objects.all().order_by('?')[:3]

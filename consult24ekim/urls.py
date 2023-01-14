@@ -26,8 +26,9 @@ urlpatterns = [
     path('Services/', Services, name='Services'),
     path('Contact/', Contact, name='Contact'),
     path('Detail/<id>/', Detail, name='Detail'),
+   
     # PAGES
-    path('Blog/', Blog,name='Blog'),
+    path('Blog/<category>/', Blog,name='Blog'),
     path('Feature/', Feature,name='Feature'),
     path('Quote/', Quote,name='Quote'),
     path('Team/', Team,name='Team'),

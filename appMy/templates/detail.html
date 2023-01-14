@@ -22,34 +22,17 @@
 
                 <!-- Comment List Start -->
                 <div class="mb-5">
-                    <h2 class="mb-4">3 Comments</h2>
+                    <h2 class="mb-4">{{ comments|length }} Comments</h2>
+                    {% for comm in comments %}
                     <div class="d-flex mb-4">
                         <img src="{% static 'img/user.jpg' %}" class="img-fluid rounded-circle" style="width: 45px; height: 45px;">
                         <div class="ps-3">
-                            <h6><a href="">John Doe</a> <small><i>01 Jan 2045</i></small></h6>
-                            <p>Diam amet duo labore stet elitr invidunt ea clita ipsum voluptua, tempor labore
-                                accusam ipsum et no at. Kasd diam tempor rebum magna dolores sed eirmod</p>
+                            <h6><a href="">{{ comm.user }}</a> <small style="margin-left: 50px; color: gray;"><i>{{ comm.date_now }}</i></small></h6>
+                            <p>{{ comm.text }}</p>
                             <button class="btn btn-sm btn-light">Reply</button>
                         </div>
                     </div>
-                    <div class="d-flex mb-4">
-                        <img src="{% static 'img/user.jpg' %}" class="img-fluid rounded-circle" style="width: 45px; height: 45px;">
-                        <div class="ps-3">
-                            <h6><a href="">John Doe</a> <small><i>01 Jan 2045</i></small></h6>
-                            <p>Diam amet duo labore stet elitr invidunt ea clita ipsum voluptua, tempor labore
-                                accusam ipsum et no at. Kasd diam tempor rebum magna dolores sed eirmod</p>
-                            <button class="btn btn-sm btn-light">Reply</button>
-                        </div>
-                    </div>
-                    <div class="d-flex ms-5 mb-4">
-                        <img src="{% static 'img/user.jpg' %}" class="img-fluid rounded-circle" style="width: 45px; height: 45px;">
-                        <div class="ps-3">
-                            <h6><a href="">John Doe</a> <small><i>01 Jan 2045</i></small></h6>
-                            <p>Diam amet duo labore stet elitr invidunt ea clita ipsum voluptua, tempor labore
-                                accusam ipsum et no at. Kasd diam tempor rebum magna dolores sed eirmod</p>
-                            <button class="btn btn-sm btn-light">Reply</button>
-                        </div>
-                    </div>
+                    {% endfor %}
                 </div>
                 <!-- Comment List End -->
 
