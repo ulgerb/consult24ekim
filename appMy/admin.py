@@ -13,9 +13,9 @@ class PostAdmin(admin.ModelAdmin):
 
 class CommentAdmin(admin.ModelAdmin):
 
-    list_display = ('user', 'title', 'category','id')
+    list_display = ('user', 'title','id')
     list_filter = ('date_now',)
-    search_fields = ('title','category','id')
+    search_fields = ('title','id')
 
 admin.site.register(Post, PostAdmin)
 admin.site.register(Category)
